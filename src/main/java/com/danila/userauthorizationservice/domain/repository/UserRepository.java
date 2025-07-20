@@ -1,4 +1,13 @@
 package com.danila.userauthorizationservice.domain.repository;
 
-public class UserRepository {
+import com.danila.userauthorizationservice.domain.model.User;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public interface UserRepository {
+    Optional<User> findByLogin(String login);
+    Optional<User> findById(UUID id);
+
+    User save(User user);
 }

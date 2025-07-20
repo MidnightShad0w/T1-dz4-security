@@ -1,4 +1,7 @@
 package com.danila.userauthorizationservice.domain.model;
 
-public record Role() {
+public enum Role {
+    ADMIN,
+    PREMIUM_USER,
+    GUEST
 }
