@@ -6,6 +6,7 @@ import com.danila.userauthorizationservice.infrastructure.persistence.UserEntity
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,6 +24,11 @@ public class UserJpaAdapter implements UserRepository {
     @Override
     public Optional<User> findById(UUID id) {
         return jpa.findById(id).map(mapper::toDomain);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return jpa.findAll().stream().map(mapper::toDomain).toList();
     }
 
     @Override
