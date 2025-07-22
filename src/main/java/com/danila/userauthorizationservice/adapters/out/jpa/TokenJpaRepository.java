@@ -1,4 +1,4 @@
 package com.danila.userauthorizationservice.adapters.out.jpa;
 
-public class TokenJpaRepository {
+public interface TokenJpaRepository {
 }
