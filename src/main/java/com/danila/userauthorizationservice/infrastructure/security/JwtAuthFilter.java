@@ -44,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 UUID userId = UUID.fromString(claims.getSubject());
 
-//                @SuppressWarnings("unchecked")
+                @SuppressWarnings("unchecked")
                 var roles = (Iterable<String>) claims.get("roles");
                 var authorities = StreamSupport.stream(roles.spliterator(), false)
                         .map(SimpleGrantedAuthority::new)
