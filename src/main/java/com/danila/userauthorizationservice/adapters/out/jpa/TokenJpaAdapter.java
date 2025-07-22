@@ -2,6 +2,9 @@ package com.danila.userauthorizationservice.adapters.out.jpa;
 
 import com.danila.userauthorizationservice.domain.model.RefreshToken;
 import com.danila.userauthorizationservice.domain.repository.TokenRepository;
+import com.danila.userauthorizationservice.infrastructure.persistence.RefreshTokenEntity;
+import com.danila.userauthorizationservice.infrastructure.persistence.UserEntity;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,11 +15,22 @@ import java.util.Optional;
 public class TokenJpaAdapter implements TokenRepository {
     private final TokenJpaRepository jpa;
     private final TokenMapper mapper;
+    private final EntityManager em;
 
     @Override
-    public RefreshToken save(RefreshToken token) {
-        return mapper.toDomain(jpa.save(mapper.toEntity(token)));
+    public RefreshToken save(RefreshToken d) {
+        UserEntity userRef = em.getReference(UserEntity.class, d.userId());
+
+        RefreshTokenEntity e = new RefreshTokenEntity();
+        e.setId(d.id());
+        e.setToken(d.token());
+        e.setExpiresAt(d.expiresAt());
+        e.setRevoked(d.revoked());
+        e.setUser(userRef);
+
+        return mapper.toDomain(jpa.save(e));
     }
+
 
     @Override
     public Optional<RefreshToken> findByToken(String token) {
@@ -24,9 +38,10 @@ public class TokenJpaAdapter implements TokenRepository {
     }
 
     @Override
-    public void revoke(RefreshToken token) {
-        var e = mapper.toEntity(token);
-        e.setRevoked(true);
-        jpa.save(e);
+    public void revoke(RefreshToken d) {
+        jpa.findById(d.id()).ifPresent(e -> {
+            e.setRevoked(true);
+            jpa.save(e);
+        });
     }
 }
