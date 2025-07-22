@@ -47,6 +47,10 @@ public class JwtProvider {
                 .compact();
     }
 
+    public SecretKey getKey() {
+        return key;
+    }
+
     private static Set<String> roleNames(Set<Role> roles) {
         return roles.stream().map(Enum::name).collect(Collectors.toSet());
     }
