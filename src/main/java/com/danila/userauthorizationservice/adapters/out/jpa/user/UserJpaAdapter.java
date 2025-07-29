@@ -1,4 +1,4 @@
-package com.danila.userauthorizationservice.adapters.out.jpa;
+package com.danila.userauthorizationservice.adapters.out.jpa.user;
 
 import com.danila.userauthorizationservice.domain.model.User;
 import com.danila.userauthorizationservice.domain.repository.UserRepository;

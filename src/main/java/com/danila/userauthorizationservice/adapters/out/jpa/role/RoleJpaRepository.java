@@ -1,4 +1,4 @@
-package com.danila.userauthorizationservice.adapters.out.jpa;
+package com.danila.userauthorizationservice.adapters.out.jpa.role;
 
 import com.danila.userauthorizationservice.infrastructure.persistence.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

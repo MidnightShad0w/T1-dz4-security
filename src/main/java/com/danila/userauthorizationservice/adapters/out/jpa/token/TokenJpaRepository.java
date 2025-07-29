@@ -1,4 +1,4 @@
-package com.danila.userauthorizationservice.adapters.out.jpa;
+package com.danila.userauthorizationservice.adapters.out.jpa.token;
 
 import com.danila.userauthorizationservice.infrastructure.persistence.RefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
